@@ -1,0 +1,26 @@
+got[{
+	"foo":"b\"a and \\ r",
+	"bar":[1,2,3],
+	"baz":{"a":"b"},
+	"num":123.45,
+	"key":"value\n\"newline\"",
+	"obj":{"true":true}
+}]
+returned 0
+0: at 4 len 3 is foo
+2: at 10 len 13 is b\"a and \\ r
+4: at 28 len 3 is bar
+6: at 33 len 7 is [1,2,3]
+8: at 44 len 3 is baz
+10: at 49 len 9 is {"a":"b"}
+12: at 62 len 3 is num
+14: at 67 len 6 is 123.45
+16: at 77 len 3 is key
+18: at 83 len 18 is value\n\"newline\"
+20: at 106 len 3 is obj
+22: at 111 len 13 is {"true":true}
+j0g_val 'key' val offset 18
+j0g_str 'key' val 'value
+"newline"'
+j0g_str 'num' val '123.45'
+j0g_test obj->true 1

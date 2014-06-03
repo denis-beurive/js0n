@@ -1,0 +1,10 @@
+got[{
+	"foo":"$¢€𤪤",
+}]
+returned 0
+0: at 4 len 3 is foo
+2: at 10 len 10 is $¢€𤪤
+j0g_val 'key' val offset 0
+j0g_str 'key' val '(null)'
+j0g_str 'num' val '0.00'
+j0g_test obj->true 0
