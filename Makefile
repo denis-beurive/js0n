@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 INCLUDE_DIR = include
 SRC_DIR     = src
 TMP_DIR     = tmp
@@ -29,14 +31,13 @@ lib: $(TMP_DIR)/j0g.o $(TMP_DIR)/js0n.o
 	$(AR) $(ARFLAGS) $(LIB_DIR)/libjs0n.a $^
 
 # ---------------------------------------------------------------------------
-# Build the test suite.
+# Execute the unit tests.
 # ---------------------------------------------------------------------------
 
 test: lib $(TEST_DIR)/js0n_test.c 
 	$(CC) -o $(BIN_DIR)/js0n_test $(CFLAGS) -L$(LIB_DIR) $(TEST_DIR)/js0n_test.c -ljs0n
-	$(BIN_DIR)/js0n_test $(TEST_DIR)/data/test.js
-	$(BIN_DIR)/js0n_test $(TEST_DIR)/data/test_utf8.js
-
+	diff <($(BIN_DIR)/js0n_test $(TEST_DIR)/data/test.js) $(TEST_DIR)/data/res_test.txt
+	diff <($(BIN_DIR)/js0n_test $(TEST_DIR)/data/test_utf8.js) $(TEST_DIR)/data/res_test_utf8.txt
 
 all: lib test
 
