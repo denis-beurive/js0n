@@ -27,15 +27,17 @@ $(TMP_DIR)/js0n.o: $(SRC_DIR)/js0n.c $(INCLUDE_DIR)/js0n.h
 # Build the library.
 # ---------------------------------------------------------------------------
 
-lib: $(TMP_DIR)/j0g.o $(TMP_DIR)/js0n.o 
+$(LIB_DIR)/libjs0n.a: $(TMP_DIR)/j0g.o $(TMP_DIR)/js0n.o
 	$(AR) $(ARFLAGS) $(LIB_DIR)/libjs0n.a $^
+
+lib: $(LIB_DIR)/libjs0n.a
 
 # ---------------------------------------------------------------------------
 # Execute the unit tests.
 # ---------------------------------------------------------------------------
 
-test: lib $(TEST_DIR)/js0n_test.c 
-	$(CC) -o $(BIN_DIR)/js0n_test $(CFLAGS) -L$(LIB_DIR) $(TEST_DIR)/js0n_test.c -ljs0n
+test: $(TEST_DIR)/js0n_test.c lib
+	$(CC) -o $(BIN_DIR)/js0n_test $(CFLAGS) -L$(LIB_DIR) $< -ljs0n
 	diff <($(BIN_DIR)/js0n_test $(TEST_DIR)/data/test.js) $(TEST_DIR)/data/res_test.txt
 	diff <($(BIN_DIR)/js0n_test $(TEST_DIR)/data/test_utf8.js) $(TEST_DIR)/data/res_test_utf8.txt
 
